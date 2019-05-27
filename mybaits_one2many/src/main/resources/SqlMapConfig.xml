@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <properties resource="jdbcConfig.properties"/>
+
+
+    <!--使用typeAliases配置别名，它只能配置domain中类的别名 -->
+    <typeAliases>
+        <package name="com.crossing.domain"></package>
+    </typeAliases>
+    <!--配置环境-->
+    <environments default="mysql">
+        <!--配置mysql的环境-->
+        <environment id="mysql">
+            <!-- 配置事务的类型-->
+            <transactionManager type="JDBC"></transactionManager>
+            <!-- 配置数据源（连接池） -->
+            <dataSource type="POOLED">
+                <!-- 配置连接数据库的4个基本信息 -->
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 指定映射配置文件的位置，映射配置文件指的是每个dao独立的配置文件 -->
+    <mappers>
+        <!--<mapper resource="com/crossing/dao/UserDao.xml"></mapper>-->
+
+        <!-- package标签是用于指定dao接口所在的包,当指定了之后就不需要在写mapper以及resource或者class了 -->
+        <package name="com.crossing.dao"></package>
+    </mappers>
+</configuration>
